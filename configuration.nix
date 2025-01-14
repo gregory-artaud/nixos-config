@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
     ];
 
   # Use the systemd EFI boot loader.
@@ -91,58 +90,6 @@
     };
   };
 
-  home-manager.backupFileExtension = "backup";
-  home-manager.useGlobalPkgs = true;
-  home-manager.users.gartaud = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      alacritty
-      yazi
-      rofi
-      feh
-      swayfx
-      chezmoi
-      grim
-      slurp
-      satty
-      hyprlock
-      swaynotificationcenter
-      swaybg
-      waybar
-      neovim
-      fd
-      swayosd
-      ripgrep
-      autotiling
-      firefox
-    ];
-
-    home.pointerCursor = {
-      name = "catppuccin-mocha-dark-cursors";
-      package = pkgs.catppuccin-cursors.mochaDark;
-      size = 22;
-    };
-
-     programs.zsh = {
-       enable = true;
-       enableCompletion = true;
-       autosuggestion.enable = true;
-       syntaxHighlighting.enable = true;
- 
-       oh-my-zsh = {
-         enable = true;
-         plugins = [ ];
-         theme = "robbyrussell";
-       };
-     };
-
-    home.file.".zprofile".text = ''
-      export WLR_NO_HARDWARE_CURSORS=1
-      exec sway
-    '';
-
-    home.stateVersion = "24.11";
-  };
-
   users.users.gartaud.shell = "${pkgs.zsh}/bin/zsh";
 
   # List packages installed in system profile. To search, run:
@@ -164,9 +111,8 @@
   };
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
-    hack-font
-    jetbrains-mono
+    nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -191,7 +137,7 @@
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  system.copySystemConfiguration = true;
+  # system.copySystemConfiguration = true;
 
   nix.extraOptions = ''
     trusted-users = root gartaud
