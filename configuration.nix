@@ -73,6 +73,7 @@
     isNormalUser = true;
     home = "/home/gartaud";
     extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
+    shell = "${pkgs.zsh}/bin/zsh";
     packages = with pkgs; [];
    };
 
@@ -90,8 +91,6 @@
     };
   };
 
-  users.users.gartaud.shell = "${pkgs.zsh}/bin/zsh";
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -108,6 +107,10 @@
     QT_QPA_PLATFORM = "wayland";
     XDG_SESSION_TYPE = "wayland";
     MOZ_ENABLE_WAYLAND = "1";
+  };
+
+  services.openvpn.servers = {
+    homeVPN    = { config = '' config /home/gartaud/.config/openvpn/homeVPN.conf ''; autoStart = false; };
   };
 
   fonts.packages = with pkgs; [
