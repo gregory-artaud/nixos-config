@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+#      ./modules/wireguard.nix
     ];
 
   # Use the systemd EFI boot loader.
@@ -18,6 +19,7 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.wg-quick.interfaces.wgHome.configFile = "/home/gartaud/.config/wg/wgHome.conf";
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -107,10 +109,6 @@
     QT_QPA_PLATFORM = "wayland";
     XDG_SESSION_TYPE = "wayland";
     MOZ_ENABLE_WAYLAND = "1";
-  };
-
-  services.openvpn.servers = {
-    homeVPN    = { config = '' config /home/gartaud/.config/openvpn/homeVPN.conf ''; autoStart = false; };
   };
 
   fonts.packages = with pkgs; [
