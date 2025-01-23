@@ -25,6 +25,7 @@
     autotiling
     zsh
     oh-my-zsh
+    bat
     inputs.zen-browser.packages."${system}".default
   ];
 
@@ -34,11 +35,7 @@
     size = 22;
   };
 
-  programs.zsh = {
-      enable = true;
-      syntaxHighlighting.enable = true;
-      autosuggestion.enable = true;
-  };
+  programs.zsh.enable = true;
   programs.zsh.oh-my-zsh = {
     enable = true;
     plugins = [ "git" ];

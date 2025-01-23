@@ -91,6 +91,11 @@
       enable = true;
       package = pkgs.swayfx;
     };
+    zsh = {
+        enable = true;
+        syntaxHighlighting.enable = true;
+        autosuggestions.enable = true;
+    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -102,6 +107,7 @@
     htop
     git
     gcc
+    zsh
   ];
 
   environment.variables = {
