@@ -21,6 +21,17 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.wg-quick.interfaces.wgHome.configFile = "/home/gartaud/.config/wg/wgHome.conf";
 
+  fileSystems."/home/gartaud/shared" = {
+  device = "gartaud@192.168.1.151:/home/gartaud/shared";
+  fsType = "sshfs";
+  options = [
+    "nodev"
+    "noatime"
+    "allow_other"
+    "IdentityFile=/home/gartaud/.ssh/id_home_zero"
+  ];
+};
+
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
