@@ -22,14 +22,16 @@
   networking.wg-quick.interfaces.wgHome.configFile = "/home/gartaud/.config/wg/wgHome.conf";
 
   fileSystems."/home/gartaud/shared" = {
-    device = "gartaud@192.168.1.151:/home/gartaud/shared";
-    fsType = "sshfs";
+    device = "192.168.1.151:/export";
+    fsType = "nfs";
     options = [
-      "delay_connect"
-      "nodev"
-      "noatime"
-      "allow_other"
-      "IdentityFile=/home/gartaud/.ssh/id_home_zero"
+      "x-systemd.requires=network-online.target"
+      "x-systemd.after=network-online.target"
+      "x-systemd.automount"
+      "x-systemd.mount-timeout=10s"
+      "noauto"
+      "soft"
+      "timeo=10"
     ];
   };
 
