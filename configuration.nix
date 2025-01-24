@@ -22,15 +22,16 @@
   networking.wg-quick.interfaces.wgHome.configFile = "/home/gartaud/.config/wg/wgHome.conf";
 
   fileSystems."/home/gartaud/shared" = {
-  device = "gartaud@192.168.1.151:/home/gartaud/shared";
-  fsType = "sshfs";
-  options = [
-    "nodev"
-    "noatime"
-    "allow_other"
-    "IdentityFile=/home/gartaud/.ssh/id_home_zero"
-  ];
-};
+    device = "gartaud@192.168.1.151:/home/gartaud/shared";
+    fsType = "sshfs";
+    options = [
+      "delay_connect"
+      "nodev"
+      "noatime"
+      "allow_other"
+      "IdentityFile=/home/gartaud/.ssh/id_home_zero"
+    ];
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -119,6 +120,7 @@
     git
     gcc
     zsh
+    sshfs
   ];
 
   environment.variables = {
