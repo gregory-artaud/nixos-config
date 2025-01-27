@@ -123,6 +123,7 @@
     gcc
     zsh
     sshfs
+    wl-clipboard
   ];
 
   environment.variables = {
